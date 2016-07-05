@@ -13,7 +13,7 @@
 
 set -e
 
-CONFIGS="x86 banana-pi vexpress"
+CONFIGS="x86"
 
 # only build a specific config if the branch selects it
 if [ ${TRAVIS_BRANCH#coverity_scan-} != ${TRAVIS_BRANCH} ]; then
