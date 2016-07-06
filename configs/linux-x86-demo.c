@@ -103,25 +103,19 @@ struct {
 			.id = 0xff01,
 			.pin_bitmap = 0x000200, /* ACPI IRQ */
 		},
+		/* HPET */ {
+			.address = 0xfed00000,
+			.id = 0xff03,
+			.pin_bitmap = 0xffffff,
+		},
 	},
 	.pio_bitmap = {
-		[     0/8 ...  0x2f7/8] = -1,
-		[ 0x2f8/8 ...  0x2ff/8] = 0, /* serial2 */
-		[ 0x300/8 ...  0x3f7/8] = -1,
-		[ 0x3f8/8 ...  0x3ff/8] = 0,  /* com1 - rtems */
-		[ 0x400/8 ...  0x5ff/8] = -1,
-		[ 0x600/8 ...  0x607/8] = 0xf0, /* acpi-evt */
-		[ 0x608/8 ...  0x7ff/8] = -1,
-		[ 0x800/8 ...  0x807/8] = 0xf0 /* apci-pm1a */,
-		[ 0x808/8 ...  0x83f/8] = 0,
-		[ 0x840/8 ...  0xcf7/8] = -1,
-		[ 0xcf8/8 ...  0xcff/8] = 0,  /* PCI devices */
-		[ 0xd00/8 ... 0xb007/8] = -1,
-		[0xb008/8 ... 0xb0ff/8] = 0, /* QEMU PM Timer */
-		[0xb100/8 ... 0xbfff/8] = -1,
-		[0xc000/8 ... 0xc0ff/8] = 0, /* PCI devices */
-		[0xc100/8 ... 0xdfff/8] = -1,
-		[0xe000/8 ... 0xe017/8] = 0, /* OXPCIe952 serial1 */
+		[     0/8 ...  0x3f7/8] = -1,
+		[ 0x3f8/8 ...  0x3ff/8] = 0, /* serial1 */
+		[ 0x400/8 ... 0xb007/8] = -1,
+		[0xb008/8 ... 0xb00f/8] = 0, /* QEMU PM Timer */
+		[0xb010/8 ... 0xe00f/8] = -1,
+		[0xe010/8 ... 0xe017/8] = 0, /* OXPCIe952 serial1 */
 		[0xe018/8 ... 0xffff/8] = -1,
 	},
 

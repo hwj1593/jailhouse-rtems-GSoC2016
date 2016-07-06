@@ -176,6 +176,11 @@ struct {
 			.id = 0xff00,
 			.pin_bitmap = 0xffffff,
 		},
+		/* HPET */ {
+			.address = 0xfed00000,
+			.id = 0xff02,
+			.pin_bitmap = 0xffffff,
+		},
 	},
 
 	.pio_bitmap = {
@@ -197,13 +202,11 @@ struct {
 		[ 0x3b0/8 ...  0x3df/8] = 0, /* VGA */
 		[ 0x3e0/8 ...  0x3ef/8] = -1,
 		[ 0x3f0/8 ...  0x3f7/8] = 0, /* floppy */
-		[ 0x3f8/8 ...  0x3ff/8] = 0, /* com1 - rtems */
+		[ 0x3f8/8 ...  0x3ff/8] = -1,
 		[ 0x400/8 ...  0x407/8] = 0xfb, /* invalid but accessed by X */
 		[ 0x408/8 ... 0x5657/8] = -1,
 		[0x5658/8 ... 0x565f/8] = 0xf0, /* vmport */
-		[0x5660/8 ... 0xb007/8] = -1,
-		[0xb008/8 ... 0xb0ff/8] = 0, /* QEMU PM Timer */
-		[0xb100/8 ... 0xbfff/8] = -1,
+		[0x5660/8 ... 0xbfff/8] = -1,
 		[0xc000/8 ... 0xc0ff/8] = 0, /* PCI devices */
 		[0xc100/8 ... 0xffff/8] = -1,
 	},
