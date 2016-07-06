@@ -178,7 +178,7 @@ struct {
 		},
 		/* HPET */ {
 			.address = 0xfed00000,
-			.id = 0xff02,
+			.id = 0xff03,
 			.pin_bitmap = 0xffffff,
 		},
 	},
