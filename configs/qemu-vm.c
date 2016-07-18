@@ -278,7 +278,7 @@ struct {
 			.msix_region_size = 0x1000,
 			.msix_address = 0xfebf6000,
 		},
-		{ /* e1000 */
+		{ /* e100 */
 			.type = JAILHOUSE_PCI_TYPE_DEVICE,
 			.domain = 0x0000,
 			.bdf = 0x18,

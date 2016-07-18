@@ -23,7 +23,7 @@ struct {
 	struct jailhouse_memory mem_regions[5];
 	struct jailhouse_cache cache_regions[1];
 	__u8 pio_bitmap[0x2000];
-	struct jailhouse_pci_device pci_devices[1];
+	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
 	.cell = {
 		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
@@ -104,6 +104,11 @@ struct {
 	},
 
 	.pci_devices = { 
+		{ /* e100 */
+			.type = JAILHOUSE_PCI_TYPE_DEVICE,
+			.domain = 0x0000,
+			.bdf = 0x18,
+		},
 		{
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
 			.domain = 0x0,
