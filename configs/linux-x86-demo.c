@@ -66,6 +66,13 @@ struct {
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
 		},
+		/* e100 BAR0 */ {
+			.phys_start = 0x80040000,
+			.virt_start = 0x80040000,
+			.size = 0x00020000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
+
 		/* IVSHMEM shared memory region */
 		{
 			.phys_start = 0x3f1ff000,
@@ -99,10 +106,6 @@ struct {
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
 			.domain = 0x0,
 			.bdf = (0x0f<<3),
-			.bar_mask = {
-				0xffffff00, 0xffffffff, 0x00000000,
-				0x00000000, 0xffffffe0, 0xffffffff,
-			},
 			.shmem_region = 3,
 			.num_msix_vectors = 1,
 		},

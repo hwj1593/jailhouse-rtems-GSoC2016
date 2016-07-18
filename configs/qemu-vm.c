@@ -35,7 +35,7 @@ struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
 	struct jailhouse_memory mem_regions[13];
-	struct jailhouse_irqchip irqchips[1];
+	struct jailhouse_irqchip irqchips[2];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[8];
 	struct jailhouse_pci_capability pci_caps[5];
@@ -154,11 +154,25 @@ struct {
 			.size = 0x1000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
+		/* MemRegion: fec00000-fec003ff : IOAPIC */
+		{
+			.phys_start = 0xfec00000,
+			.virt_start = 0xfec00000,
+			.size = 0x1000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
 		/* MemRegion: fed00000-fed003ff : PNP0103:00 */
 		{
 			.phys_start = 0xfed00000,
 			.virt_start = 0xfed00000,
 			.size = 0x1000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
+		/* MemRegion: 80040000-800403ff : e100 */
+		{
+			.phys_start = 0x80040000,
+			.virt_start = 0x80040000,
+			.size = 0x20000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		/* IVSHMEM shared memory region */
@@ -174,6 +188,13 @@ struct {
 		/* IOAPIC */ {
 			.address = 0xfec00000,
 			.id = 0xff00,
+			.pin_bitmap = {
+				    0xffffff
+			},
+		},
+		/* HPET */ {
+			.address = 0xfed00000,
+			.id = 0xff02,
 			.pin_bitmap = {
 				    0xffffff
 			},
