@@ -47,7 +47,7 @@ struct {
 		/* low RAM */ {
 			.phys_start = 0x3b600000,
 			.virt_start = 0,
-			.size = 0x00700000,
+			.size = 0x01000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
@@ -59,9 +59,9 @@ struct {
 				JAILHOUSE_MEM_COMM_REGION,
 		},
 		/* high RAM */ {
-			.phys_start = 0x3bc00000,
-			.virt_start = 0x00800000,
-			.size = 0x34ff000,
+			.phys_start = 0x3c600000,
+			.virt_start = 0x01200000,
+			.size = 0x2bff000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
@@ -99,7 +99,7 @@ struct {
 		[ 0x400/8 ... 0xb007/8] = -1,
 		[0xb008/8 ... 0xb00f/8] = 0xf0, /* QEMU PM Timer */
 		[0xb010/8 ... 0xe00f/8] = -1,
-		[0xe010/8 ... 0xe03f/8] = 0, /* OXPCIe952 serial1 */
+		[0xe010/8 ... 0xe03f/8] = 0, /* OXPCIe952 serial1 and e100 */
 		[0xe040/8 ... 0xffff/8] = -1,
 	},
 
