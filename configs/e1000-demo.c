@@ -72,8 +72,8 @@ struct {
 		[ 0x300/8 ... 0xbfff/8] = -1,
 		[0xc000/8 ... 0xc03f/8] = 0, /* e1000 */
 		[0xc040/8 ... 0xdfff/8] = -1,
-		[0xe000/8 ... 0xe03f/8] = 0, /* OXPCIe952 serial2 and e100*/
-		[0xe040/8 ... 0xffff/8] = -1,
+		[0xe000/8 ... 0xe007/8] = 0, /* OXPCIe952 serial2 */
+		[0xe008/8 ... 0xffff/8] = -1,
 	},
 
 	.pci_devices = {
