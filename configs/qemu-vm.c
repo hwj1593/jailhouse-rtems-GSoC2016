@@ -34,7 +34,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[13];
+	struct jailhouse_memory mem_regions[15];
 	struct jailhouse_irqchip irqchips[2];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[8];
@@ -277,6 +277,11 @@ struct {
 			.num_msix_vectors = 2,
 			.msix_region_size = 0x1000,
 			.msix_address = 0xfebf6000,
+		},
+		{ /* e1000 */
+			.type = JAILHOUSE_PCI_TYPE_DEVICE,
+			.domain = 0x0000,
+			.bdf = 0x18,
 		},
 		{
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
