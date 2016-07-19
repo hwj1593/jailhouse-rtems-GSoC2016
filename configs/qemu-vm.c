@@ -189,14 +189,14 @@ struct {
 			.address = 0xfec00000,
 			.id = 0xff00,
 			.pin_bitmap = {
-				    0xffffff
+				    0xffffff,
 			},
 		},
 		/* HPET */ {
 			.address = 0xfed00000,
 			.id = 0xff02,
 			.pin_bitmap = {
-				    0xffffff
+				    0xffffff,
 			},
 		},
 	},
