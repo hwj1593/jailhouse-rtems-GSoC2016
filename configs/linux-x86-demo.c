@@ -99,8 +99,8 @@ struct {
 		[ 0x400/8 ... 0xb007/8] = -1,
 		[0xb008/8 ... 0xb00f/8] = 0xf0, /* QEMU PM Timer */
 		[0xb010/8 ... 0xe00f/8] = -1,
-		[0xe010/8 ... 0xe03f/8] = 0, /* OXPCIe952 serial1 and e100 */
-		[0xe040/8 ... 0xffff/8] = -1,
+		[0xe010/8 ... 0xe017/8] = 0, /* OXPCIe952 serial1 and e100 */
+		[0xe018/8 ... 0xffff/8] = -1,
 	},
 
 	.pci_devices = { 
