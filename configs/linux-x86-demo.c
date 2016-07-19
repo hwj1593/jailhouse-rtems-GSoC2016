@@ -59,7 +59,7 @@ struct {
 				JAILHOUSE_MEM_COMM_REGION,
 		},
 		/* high RAM */ {
-			.phys_start = 0x3cd00000,
+			.phys_start = 0x3bd00000,
 			.virt_start = 0x01000000,
 			.size = 0x32ff000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
