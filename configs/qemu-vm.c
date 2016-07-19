@@ -37,7 +37,7 @@ struct {
 	struct jailhouse_memory mem_regions[15];
 	struct jailhouse_irqchip irqchips[2];
 	__u8 pio_bitmap[0x2000];
-	struct jailhouse_pci_device pci_devices[8];
+	struct jailhouse_pci_device pci_devices[9];
 	struct jailhouse_pci_capability pci_caps[5];
 } __attribute__((packed)) config = {
 	.header = {
