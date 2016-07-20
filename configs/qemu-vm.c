@@ -192,6 +192,14 @@ struct {
 				    0xffffff,
 			},		
 		},
+		/* HPET */ {
+			.address = 0xfed00000,
+			.id = 0xff01,
+			.pin_bitmap = {
+				    0xffffff,
+			},		
+		},
+
 	},
 
 	.pio_bitmap = {
