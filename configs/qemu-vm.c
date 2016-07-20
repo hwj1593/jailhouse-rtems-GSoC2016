@@ -34,10 +34,10 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[15];
+	struct jailhouse_memory mem_regions[14];
 	struct jailhouse_irqchip irqchips[2];
 	__u8 pio_bitmap[0x2000];
-	struct jailhouse_pci_device pci_devices[9];
+	struct jailhouse_pci_device pci_devices[8];
 	struct jailhouse_pci_capability pci_caps[5];
 } __attribute__((packed)) config = {
 	.header = {
@@ -52,7 +52,7 @@ struct {
 		.platform_info.x86 = {
 			.mmconfig_base = 0xb0000000,
 			.mmconfig_end_bus = 0xff,
-			.pm_timer_address = 0xb008,	//PM-timer QEMU
+			.pm_timer_address = 0xb008,
 			.iommu_units = {
 				{
 					.base = 0xfed90000,
@@ -105,7 +105,27 @@ struct {
 			.size = 0x30000,
 			.flags = JAILHOUSE_MEM_READ,
 		},
-		
+		/* MemRegion: fd000000-fdffffff : vesafb */
+		{
+			.phys_start = 0xfd000000,
+			.virt_start = 0xfd000000,
+			.size = 0x1000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
+		/* MemRegion: feb80000-febbffff : 0000:00:02.0 */
+		{
+			.phys_start = 0xfeb80000,
+			.virt_start = 0xfeb80000,
+			.size = 0x40000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
+		/* MemRegion: febc0000-febdffff : e1000 */
+		{
+			.phys_start = 0xfebc0000,
+			.virt_start = 0xfebc0000,
+			.size = 0x20000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
 		/* MemRegion: febe0000-febeffff : 0000:00:01.0 */
 		{
 			.phys_start = 0xfebe0000,
@@ -149,12 +169,12 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		/* MemRegion: 80040000-800403ff : e100 */
-		{
-			.phys_start = 0x80040000,
-			.virt_start = 0x80040000,
-			.size = 0x20000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
+		//{
+		//	.phys_start = 0x80040000,
+		//	.virt_start = 0x80040000,
+		//	.size = 0x20000,
+		//	.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		//},
 		/* IVSHMEM shared memory region */
 		{
 			.phys_start = 0x3f1ff000,
@@ -171,8 +191,8 @@ struct {
 			.pin_bitmap = {
 				    0xffffff,
 			},
-	},
-		/* HPET */  {
+		},
+		/* HPET */ {
 			.address = 0xfed00000,
 			.id = 0xff02,
 			.pin_bitmap = {
@@ -258,11 +278,11 @@ struct {
 			.msix_region_size = 0x1000,
 			.msix_address = 0xfebf6000,
 		},
-		{ /* e100 */
-			.type = JAILHOUSE_PCI_TYPE_DEVICE,
-			.domain = 0x0000,
-			.bdf = 0x18,
-		},
+		//{ /* e100 */
+		//	.type = JAILHOUSE_PCI_TYPE_DEVICE,
+		//	.domain = 0x0000,
+		//	.bdf = 0x18,
+		//},
 		{
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
 			.domain = 0x0,

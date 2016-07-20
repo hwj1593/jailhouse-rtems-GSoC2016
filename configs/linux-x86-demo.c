@@ -20,11 +20,10 @@
 struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[6];
-	//struct jailhouse_irqchip irqchips[2];
+	struct jailhouse_memory mem_regions[4];
 	struct jailhouse_cache cache_regions[1];
 	__u8 pio_bitmap[0x2000];
-	struct jailhouse_pci_device pci_devices[2];
+	struct jailhouse_pci_device pci_devices[1];
 } __attribute__((packed)) config = {
 	.cell = {
 		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
@@ -67,19 +66,12 @@ struct {
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
 		},
-		/* MemRegion: fec00000-fec003ff : IOAPIC */
-		{
-			.phys_start = 0xfec00000,
-			.virt_start = 0xfec00000,
-			.size = 0x1000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
 		/* e100 BAR0 */ {
-			.phys_start = 0x80040000,
-			.virt_start = 0x80040000,
-			.size = 0x00020000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
+		//	.phys_start = 0x80040000,
+		//	.virt_start = 0x80040000,
+		//	.size = 0x00020000,
+		//	.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		//},
 
 		/* IVSHMEM shared memory region */
 		{
@@ -90,7 +82,7 @@ struct {
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 	},
-	
+
 	.cache_regions = {
 		{
 			.start = 0,
@@ -110,11 +102,11 @@ struct {
 	},
 
 	.pci_devices = { 
-		{ /* e100 */
-			.type = JAILHOUSE_PCI_TYPE_DEVICE,
-			.domain = 0x0000,
-			.bdf = 0x18,
-		},
+		//{ /* e100 */
+		//	.type = JAILHOUSE_PCI_TYPE_DEVICE,
+		//	.domain = 0x0000,
+		//	.bdf = 0x18,
+		//},
 		{
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
 			.domain = 0x0,
