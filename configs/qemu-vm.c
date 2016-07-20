@@ -66,7 +66,7 @@ struct {
 
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
-			.num_irqchips = ARRAY_SIZE(config.irqchips),
+			//.num_irqchips = ARRAY_SIZE(config.irqchips),
 			.pio_bitmap_size = ARRAY_SIZE(config.pio_bitmap),
 			.num_pci_devices = ARRAY_SIZE(config.pci_devices),
 			.num_pci_caps = ARRAY_SIZE(config.pci_caps),
