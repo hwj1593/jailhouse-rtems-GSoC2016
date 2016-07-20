@@ -20,7 +20,7 @@
 struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[5];
+	struct jailhouse_memory mem_regions[6];
 	struct jailhouse_cache cache_regions[0];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[1];
@@ -74,12 +74,12 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		/* MemRegion: fed00000-fed003ff : PNP0103:00 */
-		//{
-		//	.phys_start = 0xfed00000,
-		//	.virt_start = 0xfed00000,
-		//	.size = 0x1000,
-		//	.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		//},
+		{
+			.phys_start = 0xfed00000,
+			.virt_start = 0xfed00000,
+			.size = 0x1000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
 		/* e100 BAR0 */ //{
 		//	.phys_start = 0x80040000,
 		//	.virt_start = 0x80040000,
