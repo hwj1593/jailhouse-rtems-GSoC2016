@@ -35,7 +35,7 @@ struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
 	struct jailhouse_memory mem_regions[14];
-	struct jailhouse_irqchip irqchips[1];
+	struct jailhouse_irqchip irqchips[2];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[8];
 	struct jailhouse_pci_capability pci_caps[5];
@@ -66,7 +66,7 @@ struct {
 
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
-			.num_irqchips = 1,
+			.num_irqchips = ARRAY_SIZE(config.irqchips),
 			.pio_bitmap_size = ARRAY_SIZE(config.pio_bitmap),
 			.num_pci_devices = ARRAY_SIZE(config.pci_devices),
 			.num_pci_caps = ARRAY_SIZE(config.pci_caps),
@@ -189,14 +189,14 @@ struct {
 			.address = 0xfec00000,
 			.id = 0xff00,
 			.pin_bitmap = {
-				    0xffffff,
+				    0xffffff
 			},		
 		},
 		/* HPET */ {
 			.address = 0xfed00000,
 			.id = 0xff01,
 			.pin_bitmap = {
-				    0xffffff,
+				    0xffffff
 			},		
 		},
 
