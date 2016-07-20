@@ -34,10 +34,10 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[15];
-	struct jailhouse_irqchip irqchips[2];
+	struct jailhouse_memory mem_regions[13];
+	//struct jailhouse_irqchip irqchips[2];
 	__u8 pio_bitmap[0x2000];
-	struct jailhouse_pci_device pci_devices[9];
+	struct jailhouse_pci_device pci_devices[8];
 	struct jailhouse_pci_capability pci_caps[5];
 } __attribute__((packed)) config = {
 	.header = {
@@ -52,7 +52,7 @@ struct {
 		.platform_info.x86 = {
 			.mmconfig_base = 0xb0000000,
 			.mmconfig_end_bus = 0xff,
-			.pm_timer_address = 0x608,
+			.pm_timer_address = 0xb008,	//PM-timer QEMU
 			.iommu_units = {
 				{
 					.base = 0xfed90000,
@@ -155,12 +155,12 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		/* MemRegion: fec00000-fec003ff : IOAPIC */
-		{
-			.phys_start = 0xfec00000,
-			.virt_start = 0xfec00000,
-			.size = 0x1000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
+		//{
+		//	.phys_start = 0xfec00000,
+		//	.virt_start = 0xfec00000,
+		//	.size = 0x1000,
+		//	.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		//},
 		/* MemRegion: fed00000-fed003ff : PNP0103:00 */
 		{
 			.phys_start = 0xfed00000,
@@ -169,12 +169,12 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		/* MemRegion: 80040000-800403ff : e100 */
-		{
-			.phys_start = 0x80040000,
-			.virt_start = 0x80040000,
-			.size = 0x20000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
+		//{
+		//	.phys_start = 0x80040000,
+		//	.virt_start = 0x80040000,
+		//	.size = 0x20000,
+		//	.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		//},
 		/* IVSHMEM shared memory region */
 		{
 			.phys_start = 0x3f1ff000,
@@ -184,22 +184,22 @@ struct {
 		},
 	},
 
-	.irqchips = {
-		/* IOAPIC */ {
-			.address = 0xfec00000,
-			.id = 0xff00,
-			.pin_bitmap = {
-				    0xffffff,
-			},
-		},
-		/* HPET */ {
-			.address = 0xfed00000,
-			.id = 0xff02,
-			.pin_bitmap = {
-				    0xffffff,
-			},
-		},
-	},
+//	.irqchips = {
+		/* IOAPIC */ //{
+//			.address = 0xfec00000,
+//			.id = 0xff00,
+//			.pin_bitmap = {
+//				    0xffffff,
+//			},
+//		},
+		/* HPET */ //{
+//			.address = 0xfed00000,
+//			.id = 0xff02,
+//			.pin_bitmap = {
+//				    0xffffff,
+//			},
+//		},
+//	},
 
 	.pio_bitmap = {
 		[     0/8 ...   0x1f/8] = 0, /* floppy DMA controller */
@@ -278,11 +278,11 @@ struct {
 			.msix_region_size = 0x1000,
 			.msix_address = 0xfebf6000,
 		},
-		{ /* e100 */
-			.type = JAILHOUSE_PCI_TYPE_DEVICE,
-			.domain = 0x0000,
-			.bdf = 0x18,
-		},
+		//{ /* e100 */
+		//	.type = JAILHOUSE_PCI_TYPE_DEVICE,
+		//	.domain = 0x0000,
+		//	.bdf = 0x18,
+		//},
 		{
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
 			.domain = 0x0,

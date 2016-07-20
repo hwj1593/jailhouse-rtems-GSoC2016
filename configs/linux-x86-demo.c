@@ -20,7 +20,8 @@
 struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[5];
+	struct jailhouse_memory mem_regions[6];
+	struct jailhouse_irqchip irqchips[2];
 	struct jailhouse_cache cache_regions[1];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[2];
@@ -33,7 +34,7 @@ struct {
 		.cpu_set_size = sizeof(config.cpus),
 		.num_memory_regions = ARRAY_SIZE(config.mem_regions),
 		.num_cache_regions = ARRAY_SIZE(config.cache_regions),
-		.num_irqchips = 0,
+		.num_irqchips = 2,
 		.pio_bitmap_size = ARRAY_SIZE(config.pio_bitmap),
 		.num_pci_devices = ARRAY_SIZE(config.pci_devices),
 		.num_pci_caps = 0,
@@ -66,6 +67,13 @@ struct {
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
 		},
+		/* MemRegion: fec00000-fec003ff : IOAPIC */
+		{
+			.phys_start = 0xfec00000,
+			.virt_start = 0xfec00000,
+			.size = 0x1000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
 		/* e100 BAR0 */ {
 			.phys_start = 0x80040000,
 			.virt_start = 0x80040000,
@@ -82,7 +90,22 @@ struct {
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 	},
-
+	.irqchips = {
+		/* IOAPIC */ {
+			.address = 0xfec00000,
+			.id = 0xff00,
+			.pin_bitmap = {
+				    0xffffff,
+			},
+		},
+		/* HPET */ {
+			.address = 0xfed00000,
+			.id = 0xff02,
+			.pin_bitmap = {
+				    0xffffff,
+			},
+		},
+	},
 	.cache_regions = {
 		{
 			.start = 0,
@@ -92,9 +115,7 @@ struct {
 	},
 
 	.pio_bitmap = {
-		[     0/8 ...   0x1f/8] = -1,
-		[  0x20/8 ...   0x27/8] = -1,  /* HACK: PIC */
-		[  0x28/8 ...  0x3f7/8] = -1,
+		[     0/8 ...  0x3f7/8] = -1,
 		[ 0x3f8/8 ...  0x3ff/8] = 0, /* serial1 */
 		[ 0x400/8 ... 0xb007/8] = -1,
 		[0xb008/8 ... 0xb00f/8] = 0xf0, /* QEMU PM Timer */
