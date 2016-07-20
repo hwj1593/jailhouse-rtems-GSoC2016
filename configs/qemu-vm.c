@@ -188,16 +188,13 @@ struct {
 		/* IOAPIC */ {
 			.address = 0xfec00000,
 			.id = 0xff00,
-			.pin_bitmap = {
-				    0xffffff
-			},		
+			.pin_bitmap = 0xffffff,		
 		},
 		/* HPET */ {
 			.address = 0xfed00000,
 			.id = 0xff01,
-			.pin_bitmap = {
-				    0xffffff
-			},		
+			.pin_bitmap = 0xffffff,
+			
 		},
 
 	},
