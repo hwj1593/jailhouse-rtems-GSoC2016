@@ -190,9 +190,7 @@ struct {
 			.id = 0xff00,
 			.pin_bitmap = {
 				    0xffffff,
-			},
-		},
-		
+			},		
 	},
 
 	.pio_bitmap = {
