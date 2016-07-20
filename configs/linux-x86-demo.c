@@ -66,7 +66,7 @@ struct {
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
 		},
-		/* e100 BAR0 */ {
+		/* e100 BAR0 */ //{
 		//	.phys_start = 0x80040000,
 		//	.virt_start = 0x80040000,
 		//	.size = 0x00020000,
