@@ -35,7 +35,7 @@ struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
 	struct jailhouse_memory mem_regions[14];
-	struct jailhouse_irqchip irqchips[2];
+	struct jailhouse_irqchip irqchips[0];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[8];
 	struct jailhouse_pci_capability pci_caps[5];
@@ -50,9 +50,9 @@ struct {
 			.phys_start = 0x3f8,
 		},
 		.platform_info.x86 = {
-			.mmconfig_base = 0xb0000000,
+			.mmconfig_base = 0xe0000000,
 			.mmconfig_end_bus = 0xff,
-			.pm_timer_address = 0xb008,
+			.pm_timer_address = 0x408,
 			.iommu_units = {
 				{
 					.base = 0xfed90000,
@@ -66,7 +66,7 @@ struct {
 
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
-			.num_irqchips = ARRAY_SIZE(config.irqchips),
+			.num_irqchips = 0,
 			.pio_bitmap_size = ARRAY_SIZE(config.pio_bitmap),
 			.num_pci_devices = ARRAY_SIZE(config.pci_devices),
 			.num_pci_caps = ARRAY_SIZE(config.pci_caps),
@@ -172,7 +172,7 @@ struct {
 		//{
 		//	.phys_start = 0x80040000,
 		//	.virt_start = 0x80040000,
-		//	.size = 0x20000,
+		//	.size = 0x1000,
 		//	.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		//},
 		/* IVSHMEM shared memory region */
@@ -184,20 +184,7 @@ struct {
 		},
 	},
 
-	.irqchips = {
-		/* IOAPIC */ {
-			.address = 0xfec00000,
-			.id = 0xff00,
-			.pin_bitmap = 0xffffff,		
-		},
-		/* HPET */ {
-			.address = 0xfed00000,
-			.id = 0xff01,
-			.pin_bitmap = 0xffffff,
-			
-		},
-
-	},
+	
 
 	.pio_bitmap = {
 		[     0/8 ...   0x1f/8] = -1, /* floppy DMA controller */
