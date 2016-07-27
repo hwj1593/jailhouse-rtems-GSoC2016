@@ -21,7 +21,8 @@ struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
 	struct jailhouse_memory mem_regions[3];
-	struct jailhouse_cache cache_regions[0];
+	//struct jailhouse_cache cache_regions[0];
+	struct jailhouse_irqchip irqchips[1];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[1];
 } __attribute__((packed)) config = {
