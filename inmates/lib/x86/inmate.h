@@ -15,7 +15,8 @@
 
 #define HEAP_BASE		0x000000
 #define FSEGMENT_BASE		0x0f0000
-#define COMM_REGION_BASE	0x100000
+//#define COMM_REGION_BASE	0x100000
+#define COMM_REGION_BASE	0x900000		// communication address is changed for rtems
 
 #define INMATE_CS32		0x8
 #define INMATE_CS64		0x10

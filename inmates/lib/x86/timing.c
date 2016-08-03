@@ -13,7 +13,8 @@
 #include <inmate.h>
 
 #define PM_TIMER_HZ		3579545
-#define PM_TIMER_OVERFLOW      ((0x1000000 * NS_PER_SEC) / PM_TIMER_HZ)
+#define PM_TIMER_OVERFLOW      ((0x9000000 * NS_PER_SEC) / PM_TIMER_HZ)		// communication address is changed for rtems
+//#define PM_TIMER_OVERFLOW      ((0x1000000 * NS_PER_SEC) / PM_TIMER_HZ)
 
 #define X2APIC_LVTT		0x832
 #define X2APIC_TMICT		0x838
