@@ -24,11 +24,11 @@ struct {
 	//struct jailhouse_cache cache_regions[0];
 	struct jailhouse_irqchip irqchips[1];
 	__u8 pio_bitmap[0x2000];
-	//struct jailhouse_pci_device pci_devices[1];
+//	struct jailhouse_pci_device pci_devices[0];
 } __attribute__((packed)) config = {
 	.cell = {
 		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
-		.name = "linux-x86-demo",
+		.name = "rtems-demo",
 		.flags = JAILHOUSE_CELL_PASSIVE_COMMREG,
 
 		.cpu_set_size = sizeof(config.cpus),
@@ -115,7 +115,7 @@ struct {
 	},
 
 	.pio_bitmap = {
-		[     0/8 ...   0x1f/8] = -1, /* floppy DMA controller */
+		[     0/8 ...   0x1f/8] = 0x08, /* floppy DMA controller */
 		[  0x20/8 ...  0x3f7/8] = -1,
 		[ 0x3f8/8 ...  0x3ff/8] = 0, /* serial1 */
 		[ 0x400/8 ...  0x5ff/8] = -1,
