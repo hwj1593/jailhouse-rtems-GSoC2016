@@ -50,7 +50,7 @@ struct {
 			.phys_start = 0x3f8,
 		},
 		.platform_info.x86 = {
-			.mmconfig_base = 0xe0000000,
+			.mmconfig_base = 0xb0000000,
 			.mmconfig_end_bus = 0xff,
 			.pm_timer_address = 0x408,
 			.iommu_units = {
