@@ -34,8 +34,8 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[14];
-	struct jailhouse_irqchip irqchips[0];
+	struct jailhouse_memory mem_regions[13];
+	struct jailhouse_irqchip irqchips[1];
 	__u8 pio_bitmap[0x2000];
 	struct jailhouse_pci_device pci_devices[8];
 	struct jailhouse_pci_capability pci_caps[5];
@@ -52,7 +52,7 @@ struct {
 		.platform_info.x86 = {
 			.mmconfig_base = 0xb0000000,
 			.mmconfig_end_bus = 0xff,
-			.pm_timer_address = 0x408,
+			.pm_timer_address = 0x608,
 			.iommu_units = {
 				{
 					.base = 0xfed90000,
@@ -66,7 +66,7 @@ struct {
 
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
-			.num_irqchips = 0,
+			.num_irqchips = ARRAY_SIZE(config.irqchips),,
 			.pio_bitmap_size = ARRAY_SIZE(config.pio_bitmap),
 			.num_pci_devices = ARRAY_SIZE(config.pci_devices),
 			.num_pci_caps = ARRAY_SIZE(config.pci_caps),
@@ -112,6 +112,13 @@ struct {
 			.size = 0x1000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
+		/* MemRegion: fe000000-fe7fffff : 0000:00:1f.7 (virtio-9p) */
+		{
+			.phys_start = 0xfe000000,
+			.virt_start = 0xfe000000,
+			.size = 0x800000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
 		/* MemRegion: feb80000-febbffff : 0000:00:02.0 */
 		{
 			.phys_start = 0xfeb80000,
@@ -124,13 +131,6 @@ struct {
 			.phys_start = 0xfebc0000,
 			.virt_start = 0xfebc0000,
 			.size = 0x20000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
-		/* MemRegion: febe0000-febeffff : 0000:00:01.0 */
-		{
-			.phys_start = 0xfebe0000,
-			.virt_start = 0xfebe0000,
-			.size = 0x10000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		/* MemRegion: febf0000-febf3fff : ICH HD audio */
@@ -155,12 +155,12 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		/* MemRegion: fec00000-fec003ff : IOAPIC */
-		{
+		/*{
 			.phys_start = 0xfec00000,
 			.virt_start = 0xfec00000,
 			.size = 0x1000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
+		},*/
 		/* MemRegion: fed00000-fed003ff : PNP0103:00 */
 		{
 			.phys_start = 0xfed00000,
@@ -177,17 +177,26 @@ struct {
 		//},
 		/* IVSHMEM shared memory region */
 		{
-			.phys_start = 0x3f1ff000,
-			.virt_start = 0x3f1ff000,
-			.size = 0x1000,
+			.phys_start = 0x3f100000,
+			.virt_start = 0x3f100000,
+			.size = 0x100000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 	},
 
-	
+	.irqchips = {
+		/* IOAPIC */ {
+			.address = 0xfec00000,
+			.id = 0xff00,
+			.pin_bitmap = {
+				    0xffffff
+			},
+		},
+	},
+
 
 	.pio_bitmap = {
-		[     0/8 ...   0x1f/8] = -1, /* floppy DMA controller */
+		[     0/8 ...   0x1f/8] = 0, /* floppy DMA controller */
 		[  0x20/8 ...   0x3f/8] = -1,
 		[  0x40/8 ...   0x47/8] = 0xf0, /* PIT */
 		[  0x48/8 ...   0x5f/8] = -1,
@@ -263,11 +272,6 @@ struct {
 			.msix_region_size = 0x1000,
 			.msix_address = 0xfebf6000,
 		},
-		//{ /* e100 */
-		//	.type = JAILHOUSE_PCI_TYPE_DEVICE,
-		//	.domain = 0x0000,
-		//	.bdf = 0x18,
-		//},
 		{
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
 			.domain = 0x0,
@@ -307,7 +311,7 @@ struct {
 		},
 		{ /* virtio-9p-pci */
 			.id = 0x11,
-			.start = 0x40,
+			.start = 0x98,
 			.len = 12,
 			.flags = JAILHOUSE_PCICAPS_WRITE,
 		},
