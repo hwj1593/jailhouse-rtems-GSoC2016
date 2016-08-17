@@ -24,7 +24,7 @@ struct {
 	//struct jailhouse_cache cache_regions[0];
 	struct jailhouse_irqchip irqchips[1];
 	__u8 pio_bitmap[0x2000];
-	struct jailhouse_pci_device pci_devices[1];
+	//struct jailhouse_pci_device pci_devices[1];
 } __attribute__((packed)) config = {
 	.cell = {
 		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
@@ -107,20 +107,11 @@ struct {
 	},
 */
 	.irqchips = {
-		.irqchips = {
 		/* IOAPIC */ {
 			.address = 0xfec00000,
 			.id = 0xff01,
 			.pin_bitmap = 0x000200, /* ACPI IRQ */
 		},
-	},
-		/* HPET */ /*{
-			.address = 0xfed00000,
-			.id = 0xff01,
-			.pin_bitmap = 0xffffff,
-			
-		},*/
-
 	},
 
 	.pio_bitmap = {
