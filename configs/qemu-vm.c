@@ -196,7 +196,7 @@ struct {
 
 
 	.pio_bitmap = {
-		[     0/8 ...   0x1f/8] = 0, /* floppy DMA controller */
+		[     0/8 ...   0x1f/8] = -1, /* floppy DMA controller */
 		[  0x20/8 ...   0x3f/8] = -1,
 		[  0x40/8 ...   0x47/8] = 0xf0, /* PIT */
 		[  0x48/8 ...   0x5f/8] = -1,
