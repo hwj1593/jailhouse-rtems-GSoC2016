@@ -85,6 +85,8 @@ void inmate_main(void)
 	bool cache_pollution;
 	unsigned int n;
 
+	map_range(0x900000, PAGE_SIZE, MAP_UNCACHED);
+
 	printk_uart_base = UART_BASE;
 	do {
 		for (n = 0; n < UART_IDLE_LOOPS; n++)
