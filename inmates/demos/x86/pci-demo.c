@@ -20,7 +20,7 @@
 #ifdef CONFIG_UART_OXPCIE952
 #define UART_BASE		0xe000
 #else
-#define UART_BASE		0x2f8
+#define UART_BASE		0x3f8
 #endif
 
 #define IRQ_VECTOR		32
