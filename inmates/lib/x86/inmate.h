@@ -25,10 +25,10 @@
 #define PAGE_SIZE		(4 * 1024ULL)
 #ifdef __x86_64__
 #define BITS_PER_LONG		64
-#define HUGE_PAGE_SIZE		(16 * 1024 * 1024ULL)
+#define HUGE_PAGE_SIZE		(2 * 32 * 1024 * 1024ULL)
 #else
 #define BITS_PER_LONG		32
-#define HUGE_PAGE_SIZE		(16 * 1024 * 1024ULL)
+#define HUGE_PAGE_SIZE		(4 * 32 * 1024 * 1024ULL)
 #endif
 #define PAGE_MASK		(~(PAGE_SIZE - 1))
 #define HUGE_PAGE_MASK		(~(HUGE_PAGE_SIZE - 1))
