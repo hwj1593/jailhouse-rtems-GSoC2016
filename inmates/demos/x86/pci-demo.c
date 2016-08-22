@@ -45,6 +45,7 @@ void inmate_main(void)
 	u64 bar;
 	int bdf;
 
+	map_range((void *)0x900000, PAGE_SIZE, MAP_UNCACHED);
 	printk_uart_base = UART_BASE;
 
 	int_init();
